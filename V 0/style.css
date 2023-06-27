@@ -122,14 +122,14 @@ section .color:nth-child(3) {
 }
 .form h2 {
   position: relative;
-  color: #fff;
+  color: #000000;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 10px;
 }
 .form .inputBox {
-  width: 100%;
+  width: 20%;
   margin-top: 20px;
 }
 .form .inputBox input {
@@ -148,15 +148,15 @@ section .color:nth-child(3) {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 .form .inputBox input[type="submit"] {
-  background: #00ff77;
+  background: #fe8700;
   color: #000000;
-  max-width: 100px;
+  max-width: 120px;
   cursor: pointer;
   margin-bottom: 20px;
   font-weight: 600;
 }
 .form .inputBox input[type="button"] {
-  background: #fe8700;
+  background: #00ff77;
   color: #000000;
   max-width: 100px;
   cursor: pointer;
