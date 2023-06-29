@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FOOD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="box">
+        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 1"></div>
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
+        <dic class="container">
+          <div class="form">
+            <h2>请选择目标文件夹</h2>
+            <form action="src/php/searchFolder.php" method="get">
+              <!-- <html:file
+                property="uploadFile"
+                styleId="uploadFile"
+                οnchange="document.getElementById('attachmentFilePath').value=this.value"
+              />
+               -->
+              <div class="inputBox">
+                <input
+                  type="file"
+                  id="file_select"
+                  @change="triggerFile($event)"
+                  οnchange="console.log(this.value)"
+                />
+                <!-- webkitdirectory
+                  directory -->
+                <input
+                  id="attachmentFilePath"
+                  style="display: none"
+                  maxlength="64"
+                />
+                <!-- <input
+                  property="attachmentFilePath"
+                  styleId="attachmentFilePath"
+                  style="display: none"
+                  maxlength="64"
+                /> -->
+              </div>
+            </form>
+          </div>
+        </dic>
+      </div>
+    </section>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/src/js/1.js"></script>
+  </body>
+</html>
