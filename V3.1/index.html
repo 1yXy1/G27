@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FILE</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="box">
+        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 1"></div>
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
+        <div class="container">
+          <div class="form">
+            <h2>请选择目标文件夹</h2>
+            <form
+              action="src/php/uploads.php"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="inputBox">
+                <input
+                  type="file"
+                  id="file_select"
+                  name="files[]"
+                  @change="triggerFile($event)"
+                  multiple="multiple"
+                  webkitdirectory
+                  directory
+                />
+                <input type="submit" value="确认上传" />
+                <!-- 列表显示 -->
+                <div id="list"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      document.querySelector("#file_select").addEventListener("change", (e) => {
+        console.log(e.target.files.length);
+        total = e.target.files.length;
+        namelist = "";
+        for (let entry of e.target.files) {
+          namelist += '"' + entry.name + '",';
+        }
+        var list = "";
+        for (let entry of e.target.files) {
+          console.log(entry.name, entry.webkitRelativePath);
+
+          list +=
+            "<input type='text' value='" +
+            entry.name +
+            "'  readonly='readonly' /> ";
+        }
+        $("#list").append(list);
+        console.log(namelist);
+      }); //给自己看的
+
+      // $("#btn_submit").click(function () {
+      //   var key = $("#search_btn").val();
+
+      //   $.ajax({
+      //     url: "",
+      //     type: "post",
+      //     data: {
+      //         total:total,
+      //         key:key,
+      //         namelist:namelist,
+      //       },
+      //       dataType: "JSON",
+      //     success: function (data) {
+      //       //处理
+      //       console.log(1);
+      //       for (let i = 0; i < jsonArray.length; i++) {
+      //         var filename = data[i].filename;
+      //         var line = data[i].line;
+      //         var word = data[i].word;
+      //       }
+      //     },
+      //   });
+      // });
+    </script>
+  </body>
+</html>

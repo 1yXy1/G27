@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEARCH</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="color"></div>
+      <div class="box">
+        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 1"></div>
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
+        <div class="container">
+          <div class="form">
+            <h2>请输入搜索内容</h2>
+            <form>
+                  <div class="inputBox" id="result">
+                  <!-- ajax后传关键字 -->
+                  <input type="text" id="search_btn" />
+                  <input type="button" id="btn_submit" value="搜索内容"></input>
+                  <!-- <input type="button" onclick="download()" value="保存结果"></input> -->
+                  <input type="hidden" value="" id="text">
+                  
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+                 
+      </div>
+    </section>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $("#btn_submit").click(function () {
+        var key = $("#search_btn").val();
+        $.ajax({
+          url: "/src/php/search.php",
+          type: "post",
+          data: {
+              "key":key,
+            },
+            dataType: "JSON", 
+          success: function (data) {
+            // //处理
+            // console.log(1);
+            // //console.log(1);
+            // console.log(data[0].data[0].filename);
+            // console.log(data[0].data[0].line);
+            // console.log(data[0].data[0].value);
+            var resultHtml="";
+            var resultTxt="";
+            for (let i = 0; i < data[0].data.length; i++) {
+              var filename = data[0].data[i].filename;
+              var line = data[0].data[i].line;
+              var value = data[0].data[i].value;
+              console.log(filename,line,value);
+              resultHtml+="<input type=\"text\" value='"+filename+"     第"+line+"行：     "+value+"' readonly='readonly'></input>";
+              resultTxt+=filename+"     第"+line+"行：  "+value+"\n\n";
+            }
+            console.log(resultHtml);
+            console.log(resultTxt);
+            $("#result").append(resultHtml);
+            $("#result").append('<input type="button" onclick="download()" value="保存结果"></input>');
+            document.getElementById("text").value=resultTxt;
+           // console.log(resultHtml);
+           // console.log(resultTxt);
+            
+          },
+        });
+      });
+      
+    function download()
+    { 
+    var text = document.getElementById("text").value; //要保存的内容
+    if(text==""){
+        alert("没有内容可保存！");
+        return;
+    }
+    var blob = new Blob([text], { type: "text/plain"}); 
+    var anchor = document.createElement("a"); 
+    anchor.download = "my-filename.txt"; 
+    anchor.href = window.URL.createObjectURL(blob); 
+    anchor.target ="_blank"; 
+    anchor.style.display = "none"; 
+    document.body.appendChild(anchor); 
+    anchor.click(); 
+    document.body.removeChild(anchor); 
+    }
+
+    </script>
+  </body>
+</html>
